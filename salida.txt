@@ -1,19 +1,19 @@
 MAIN
- Parent-a= ( VOID Parent-c= )
-Inicio={
- INT ID= i Punto-coma=;
-INT ID= j Punto-coma=;
-CHAR ID= c Punto-coma=;
-CHAR ID= cadena 
-FLOAT ID= z Punto-coma=;
-ID= z Op-asig==Cte real=14.9e-8Punto-coma=;
-ID= z Op-asig==Cte real=12.9Op-not=!Punto-coma=;
-ID= cadena Op-asig==Cte cadena="Hola"Punto-coma=;
-SCANF Parent-a= ( Cte cadena="%d",ID= i Parent-c= )Punto-coma=;
-ID= i Op-asig==ID= i Op-mul=*Cte entera=2Punto-coma=;
-PRINTF Parent-a= ( Cte cadena="El doble es %d",ID= i Parent-c= )Punto-coma=;
+Parent-a= ( VOID Parent-c= ) 
+Inicio={ 
+INT Id= i Punto-coma=;
+INT Id= j Punto-coma=;
+CHAR Id= c Punto-coma=;
+CHAR Id= cadena 
+FLOAT Id= z Punto-coma=;
+Id= z Op-asig= = Cte real= 14.9e-8 Punto-coma=;
+Id= z Op-asig= = Cte real= 12.9 Op-not=!Punto-coma=;
+Id= cadena Op-asig= = Cte cadena= "Hola" Punto-coma=;
+SCANF Parent-a= ( Cte cadena= "%d" ,Id= i Parent-c= ) Punto-coma=;
+Id= i Op-asig= = Id= i Op-mult= * Cte entera= 2 Punto-coma=;
+PRINTF Parent-a= ( Cte cadena= "El doble es %d" ,Id= i Parent-c= ) Punto-coma=;
 Fin=}
 
-
-Identificadores: 
-Se encontraron 5 identificadoresID=i; ID=j; ID=c; ID=cadena; ID=z
+TABLA DE IDENTIFICADORES
+Se encontraron 5 identificadores
+Id=i; Id=j; Id=c; Id=cadena; Id=z;

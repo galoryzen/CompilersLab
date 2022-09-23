@@ -13,6 +13,7 @@ CTE-ENT       [-]?[0-9]+
 CTE-REAL      [-]?[0-9]+(\.[0-9]+)?([eE][-+]?[0-9]+(\.[0-9]+)?)?
 ERROR         [0-9]+[0-9a-zA-Z_]+
 CTE-CADENA    \".*\"
+CTE-CARACTER  \'.*\'
 
 
 %%
@@ -24,6 +25,7 @@ CTE-CADENA    \".*\"
 "final"         {fprintf(yyout, "FINAL");}
 "abstract"      {fprintf(yyout, "ABSTRACT");}
 "main"          {fprintf(yyout, "MAIN\n");}
+"main "          {fprintf(yyout, "MAIN\n");}
 "void"          {fprintf(yyout, "VOID ");}
 "new"           {fprintf(yyout, "NEW");}
 "return"        {fprintf(yyout, "RETURN");}
@@ -50,7 +52,7 @@ CTE-CADENA    \".*\"
 
 {ID}          {
 
-                      fprintf(yyout, "ID= %s ", yytext);
+                      fprintf(yyout, "Id= %s ", yytext);
                       char *token;
                       char aux[10000];
                       strcpy(aux, ids);
@@ -69,15 +71,16 @@ CTE-CADENA    \".*\"
                       }
                   }
 
-{CTE-ENT}     {fprintf(yyout, "Cte entera=%s", yytext);}
-{CTE-REAL}    {fprintf(yyout, "Cte real=%s", yytext);}
-{CTE-CADENA}  {fprintf(yyout, "Cte cadena=%s", yytext);}
+{CTE-ENT}       {fprintf(yyout, "Cte entera= %s ", yytext);}
+{CTE-REAL}      {fprintf(yyout, "Cte real= %s ", yytext);}
+{CTE-CADENA}    {fprintf(yyout, "Cte cadena= %s ", yytext);}
+{CTE-CARACTER}  {fprintf(yyout, "Cte caracter= %s ", yytext);}
 
-"="           {fprintf(yyout, "Op-asig=%s", yytext);}
-"+"           {fprintf(yyout, "Op-sum=%s", yytext);}
-"-"           {fprintf(yyout, "Op-res=%s", yytext);}
-"*"           {fprintf(yyout, "Op-mul=%s", yytext);}
-"/"           {fprintf(yyout, "Op-div=%s", yytext);}
+"="           {fprintf(yyout, "Op-asig= %s ", yytext);}
+"+"           {fprintf(yyout, "Op-sum= %s ", yytext);}
+"-"           {fprintf(yyout, "Op-res= %s ", yytext);}
+"*"           {fprintf(yyout, "Op-mult= %s ", yytext);}
+"/"           {fprintf(yyout, "Op-div= %s ", yytext);}
 
 "=="          {fprintf(yyout, "Op-igual=%s", yytext);}
 "!="          {fprintf(yyout, "Op-dif=%s", yytext);}
@@ -99,7 +102,8 @@ CTE-CADENA    \".*\"
 "!"           {fprintf(yyout, "Op-not=%s", yytext);}
 
 "("           {fprintf(yyout, "Parent-a= %s ", yytext);}
-")"           {fprintf(yyout, "Parent-c= %s", yytext);}
+")"           {fprintf(yyout, "Parent-c= %s ", yytext);}
+"{ "           {fprintf(yyout, "Inicio=%s\n", yytext);}
 "{"           {fprintf(yyout, "Inicio=%s\n", yytext);}
 "}"           {fprintf(yyout, "Fin=%s", yytext);}
 ";"           {fprintf(yyout, "Punto-coma=%s", yytext);}
@@ -120,17 +124,18 @@ int main(int argc, char *argv[]){
 
     yylex();
 
-    fprintf(fp2, "\n\nIdentificadores: \n");
-    fprintf(fp2, "Se encontraron %d identificadores", idC-1);
+    fprintf(fp2, "\nTABLA DE IDENTIFICADORES\n");
+    fprintf(fp2, "Se encontraron %d identificadores\n", idC-1);
 
     if(idC > 1){
         int i = 0;
-        fprintf(fp2, "ID=");
+        fprintf(fp2, "Id=");
         while(i<strlen(ids)){
             fprintf(fp2, "%c", ids[i]);
-            if(ids[i] == ';') fprintf(fp2, " ID=");
+            if(ids[i] == ';') fprintf(fp2, " Id=");
             i++;
         }
+        fprintf(fp2, ";");
     }
 
     return 0;
