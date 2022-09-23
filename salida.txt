@@ -1,0 +1,19 @@
+MAIN
+ Parent-a= ( VOID Parent-c= )
+Inicio={
+ INT ID= i Punto-coma=;
+INT ID= j Punto-coma=;
+CHAR ID= c Punto-coma=;
+CHAR ID= cadena 
+FLOAT ID= z Punto-coma=;
+ID= z Op-asig==Cte real=14.9e-8Punto-coma=;
+ID= z Op-asig==Cte real=12.9Op-not=!Punto-coma=;
+ID= cadena Op-asig==Cte cadena="Hola"Punto-coma=;
+SCANF Parent-a= ( Cte cadena="%d",ID= i Parent-c= )Punto-coma=;
+ID= i Op-asig==ID= i Op-mul=*Cte entera=2Punto-coma=;
+PRINTF Parent-a= ( Cte cadena="El doble es %d",ID= i Parent-c= )Punto-coma=;
+Fin=}
+
+
+Identificadores: 
+Se encontraron 5 identificadoresID=i; ID=j; ID=c; ID=cadena; ID=z
