@@ -8,12 +8,12 @@ int erroresC = 0;
 char errores[999999];
 %}
 
-ID            [a-zA-Z][a-zA-Z0-9_]*
-CTE-ENT       [-]?[0-9]+
-CTE-REAL      [-]?[0-9]+(\.[0-9]+)?([eE][-+]?[0-9]+(\.[0-9]+)?)?
-ERROR         [0-9]+[0-9a-zA-Z_]+
-CTE-CADENA    \".*\"
-CTE-CARACTER  \'.*\'
+ID            [a-zA-Z_][a-zA-Z0-9_]*
+CTE_ENT       [-]?[0-9]+
+CTE_REAL      [-]?[0-9]+(\.[0-9]+)?([eE][-+]?[0-9]+(\.[0-9]+)?)?
+ERROR         [0-9]+[0-9a-zA-Z_]+|([0-9]+,[0-9a-zA-Z])|([$@:!#]{ID})|({ID}[$@:!#]+[a-zA-Z_0-9$@:!#]*)
+CTE_CADENA    \".*\"
+CTE_CARACTER  \'.*\'
 
 
 %%
@@ -77,10 +77,10 @@ CTE-CARACTER  \'.*\'
                       }
                 }
 
-{CTE-ENT}       {fprintf(yyout, "Cte entera= %s ", yytext);}
-{CTE-REAL}      {fprintf(yyout, "Cte real= %s ", yytext);}
-{CTE-CADENA}    {fprintf(yyout, "Cte cadena= %s ", yytext);}
-{CTE-CARACTER}  {fprintf(yyout, "Cte caracter= %s ", yytext);}
+{CTE_ENT}       {fprintf(yyout, "Cte entera= %s ", yytext);}
+{CTE_REAL}      {fprintf(yyout, "Cte real= %s ", yytext);}
+{CTE_CADENA}    {fprintf(yyout, "Cte cadena= %s ", yytext);}
+{CTE_CARACTER}  {fprintf(yyout, "Cte caracter= %s ", yytext);}
 
 "="           {fprintf(yyout, "Op-asig= %s ", yytext);}
 "+"           {fprintf(yyout, "Op-sum= %s ", yytext);}
@@ -165,10 +165,14 @@ int main(int argc, char *argv[]){
 
     if(idC > 0){
         int i = 0;
-        fprintf(fp2, "Id=");
+        int j = 0;
+        fprintf(fp2, "Id0=");
         while(i<strlen(ids)){
             fprintf(fp2, "%c", ids[i]);
-            if(ids[i] == ';') fprintf(fp2, " Id=");
+            if(ids[i] == ';') {
+                j++;
+                fprintf(fp2, " Id%d=", j);
+            }
             i++;
         }
         fprintf(fp2, ";");

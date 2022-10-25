@@ -1,0 +1,41 @@
+
+INT MAIN
+Parent-a= ( Parent-c= )  Inicio={
+
+    INT Id= a , Id= b , Id= md , Id= c Punto-coma=;
+    INT Id= d  Op-asig= =  Cte entera= 15 Punto-coma=;
+    FLOAT Id= x ,Id= y ,Id= z Punto-coma=;
+
+    Id= a  Op-asig= =  Cte entera= 27 Punto-coma=;
+    err = 1b  Op-asig= =  Cte entera= 3 Punto-coma=;      Id= x  Op-asig= =  err = 45,9  Id= asd Punto-coma=;     Id= y  Op-asig= =  Cte real= 3.3 Punto-coma=;
+    Id= c  Op-asig= =  Id= a  Op-sum= +  err = 7b Punto-coma=;      PRINTFParent-a= ( Cte cadena= "valor de suma %d\n" , Id= c Parent-c= ) Punto-coma=;
+    Id= c  Op-igual= ==  Id= a  Op-res= -  Id= b Punto-coma=;      PRINTFParent-a= ( Cte cadena= "valor de resta %d\n" , Id= c Parent-c= ) Punto-coma=;
+    Id= z1  Op-asig= =  Id= a  Op-div= /  Id= b Punto-coma=;      PRINTFParent-a= ( Cte cadena= "valor de división  %.3f\n" , Id= z Parent-c= ) Punto-coma=;
+
+    
+    Id= md  Op-asig= =  Cte entera= 0 Punto-coma=;
+    INT err = $i  Op-asig= =  Cte entera= 1 Punto-coma=;      WHILE Parent-a= ( Id= i  Op-menor= <  Id= a  Inicio={
+
+                IF Parent-a= ( Id= a Op-mod= % Id= i  Op-igual= ==  Cte entera= 0 Parent-c= )  
+           Id= md  Op-asig= = Op-div= /  Id= i Punto-coma=;         Id= i  Op-asig= =  Id= i  Op-sum= +  Cte entera= 1 Punto-coma=;
+    Fin=}
+
+    Op-res= - Id= i  Op-asig= =  err = #i 
+    PRINTFParent-a= ( Cte cadena= "el máximo divisor de %d es %d\n" , Id= a , Id= md Parent-c= ) Punto-coma=;
+
+    INT Id= s  Op-asig= =  Cte entera= 0 Punto-coma=;
+    FOR Parent-a= ( INT Id= j Op-asig= = Cte entera= 1 Punto-coma=;Id= j Op-menor-igual= <=Id= d Punto-coma=;Id= j  Op-asig= =  Id= j  Op-sum= +  Cte entera= 2 Parent-c= )  Inicio={
+
+        Id= s  Op-asig= =  Id= s  Op-sum= +  err = 2j Punto-coma=;      Fin=}
+
+    PRINTFParent-a= ( Cte cadena= "la suma de los menores que %d es %d\n" , Id= d , err = 7s Parent-c= ) Punto-coma=;     
+Fin=}
+
+
+TABLA DE IDENTIFICADORES
+Se encontraron 13 identificadores
+Id0=a; Id1=b; Id2=md; Id3=c; Id4=d; Id5=x; Id6=y; Id7=z; Id8=asd; Id9=z1; Id10=i; Id11=s; Id12=j;
+
+TABLA DE ERRORES
+Se encontraron 7 errores
+Error=1b; Error=45,9; Error=7b; Error=$i; Error=#i; Error=2j; Error=7s;
