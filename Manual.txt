@@ -1,0 +1,18 @@
+Para ejecutar el programa tenemos 2 opciones:
+
+1)
+Mediante el script de bash adjuntado 'test.sh'
+Se ejecuta en la terminal haciendo sh test.sh
+Este script tomará el archivo LAB01_Cabrera_Gonzalez_Lopez.l, lo pasará por flex, lo compilará en c y posteriormente correrá el ejecutable
+No obstante siempre tomará el archivo prueba.c, y será este el archivo a modificar para pasarlo por el analizador léxico.
+
+2)
+Para realizarse manualmente se deben ejecutar los siguientes comandos:
+
+flex LAB01_Cabrera_Gonzalez_Lopez.l
+gcc lex.yy.c -o LAB01_Cabrera_Gonzalez_Lopez
+./LAB01_Cabrera_Gonzalez_Lopez prueba.c
+
+En este caso podemos cambiar prueba.c por cualquier otro archivo de codigo fuente c
+
+En ambos casos la salida estará en el archivo salida.txt
