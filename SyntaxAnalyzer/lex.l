@@ -2,7 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-int errores = 0;
+int yylineno; /* from lexer */
+
 %}
 
 ID            [a-zA-Z_][a-zA-Z0-9_]*
@@ -97,7 +98,7 @@ CTE_CARACTER  \'.*\'
 ":"           {return(DOS_PUNTOS);}
 ","           {return(COMA);}
 
-\n {errores++}
+\n { }
 
 %%
 
