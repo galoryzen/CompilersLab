@@ -1,6 +1,6 @@
 # CompilersLab
 
-Lexical Analyzer for the language C, made using flex for a Compilers course at Universidad del Norte
+Lexical and Syntactical Analyzer for the language C, made using flex and bison for a Compilers course at Universidad del Norte
 
 ## Run
 
