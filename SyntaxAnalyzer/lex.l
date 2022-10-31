@@ -2,8 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "y.tab.h"
-int yylineno; /* from lexer */
+#include "syntax.tab.h"
+int linea=0; /* from lexer */
 
 %}
 
@@ -99,7 +99,7 @@ CTE_CARACTER  \'.*\'
 ":"           {return(DOS_PUNTOS);}
 ","           {return(COMA);}
 
-\n { }
+\n {linea++;}
 
 %%
 

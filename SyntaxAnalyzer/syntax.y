@@ -4,12 +4,13 @@
 #include <stdlib.h>
 #include <string.h>
 //yylineno
-#include "y.tab.h"
+#include "syntax.tab.h"
 extern int yylex();
 extern FILE * yyin;
 extern FILE * yyout;
-extern int yylineno;
-
+extern int linea;
+int errores = 0;
+void yyerror(char *s);
 %}
 
 %token PUBLIC
@@ -81,8 +82,8 @@ extern int yylineno;
 INIT  :   funcion_init
         ;
 
-funcion_init    :   VOID MAIN PARENT_A PARENT_C CORCHETE_A CORCHETE_C 
-                |   VOID MAIN PARENT_A PARENT_C CORCHETE_A cuerpo CORCHETE_C
+funcion_init    :   VOID MAIN PARENT_A PARENT_C LLAVE_A LLAVE_C 
+                |   VOID MAIN PARENT_A PARENT_C LLAVE_A cuerpo LLAVE_C
                 ;
 
 cuerpo  :   declaracion
@@ -91,12 +92,15 @@ cuerpo  :   declaracion
         |   sentencia cuerpo
         ;
 
-declaracion :   tipo ID PUNTO_COMA
-            |   tipo ID OP_ASIG expresion PUNTO_COMA
-            |   tipo ID CORCHETE_A ENTERO CORCHETE_C PUNTO_COMA
-            |   tipo ID CORCHETE_A ENTERO CORCHETE_C OP_ASIG CORCHETE_A CORCHETE_C PUNTO_COMA
-            |   tipo ID CORCHETE_A ENTERO CORCHETE_C OP_ASIG CORCHETE_A lista CORCHETE_C PUNTO_COMA
-            ;
+declaracion     :   tipo ID PUNTO_COMA
+                |   tipo ID COMA ID PUNTO_COMA
+                |   tipo ID COMA declaracion
+                |   tipo ID 
+                |   tipo ID OP_ASIG expresion PUNTO_COMA
+                |   tipo ID CORCHETE_A ENTERO CORCHETE_C PUNTO_COMA
+                |   tipo ID CORCHETE_A ENTERO CORCHETE_C OP_ASIG CORCHETE_A CORCHETE_C PUNTO_COMA
+                |   tipo ID CORCHETE_A ENTERO CORCHETE_C OP_ASIG CORCHETE_A lista CORCHETE_C PUNTO_COMA
+                ;
 
 lista   :   expresion
         |   expresion COMA lista
@@ -168,14 +172,30 @@ expresion   :   expresion OP_SUM expresion
 
 int main(int argc, char *argv[])
 {
-    yyparse();
-    return 0;
+    if (argc == 2){
+        yyin = fopen (argv[1], "r");
+    	yyout=fopen("salida.txt","w");
+
+        if (yyin == NULL) {
+            printf ("El fichero %s no se puede abrir\n", argv[1]);
+            exit (-1);
+        }else{
+			do {
+				yyparse();
+			} while(!feof(yyin));
+			if(errores==0){
+				fprintf(yyout, "No hubo ningun error sintactico.");
+				fprintf(stderr, "No hubo ningun error sintactico.\n");	
+			}
+		}
+			
+	}
 }
 
-int yyerror(char *s)
+void yyerror(char *s)
 {
-    printf("Error: %s en la linea %d", s, yylineno);
-    return 0;
+    errores++;
+    fprintf(yyout, "La linea %d tiene un error sintáctico", linea);
 }
 
 

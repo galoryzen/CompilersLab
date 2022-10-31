@@ -1,4 +1,5 @@
-rm -rf lex.yy.c LAB01_Cabrera_Gonzalez_Lopez salida.txt
-flex LAB01_Cabrera_Gonzalez_Lopez.l
-gcc lex.yy.c -o LAB01_Cabrera_Gonzalez_Lopez
-./LAB01_Cabrera_Gonzalez_Lopez prueba2.c
+rm -rf lex.yy.c syntax.tab.c syntax.tab.h a.out
+bison -d syntax.y
+flex lex.l
+gcc syntax.tab.c lex.yy.c -o a -ll
+./a prueba2.c

@@ -580,8 +580,8 @@ char *yytext;
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "y.tab.h"
-int yylineno; /* from lexer */
+#include "syntax.tab.h"
+int linea=0; /* from lexer */
 
 #line 587 "lex.yy.c"
 #line 588 "lex.yy.c"
@@ -1222,7 +1222,7 @@ case 72:
 /* rule 72 can match eol */
 YY_RULE_SETUP
 #line 102 "lex.l"
-{ }
+{linea++;}
 	YY_BREAK
 case 73:
 YY_RULE_SETUP

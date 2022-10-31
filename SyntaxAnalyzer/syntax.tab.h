@@ -35,8 +35,8 @@
    especially those whose name start with YY_ or yy_.  They are
    private implementation details that can be changed or removed.  */
 
-#ifndef YY_YY_Y_TAB_H_INCLUDED
-# define YY_YY_Y_TAB_H_INCLUDED
+#ifndef YY_YY_SYNTAX_TAB_H_INCLUDED
+# define YY_YY_SYNTAX_TAB_H_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -123,77 +123,6 @@ extern int yydebug;
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
-/* Token kinds.  */
-#define YYEMPTY -2
-#define YYEOF 0
-#define YYerror 256
-#define YYUNDEF 257
-#define PUBLIC 258
-#define PRIVATE 259
-#define PROTECTED 260
-#define STATIC 261
-#define FINAL 262
-#define ABSTRACT 263
-#define MAIN 264
-#define VOID 265
-#define NEW 266
-#define RETURN 267
-#define PRINTF 268
-#define SCANF 269
-#define IF 270
-#define ELSE 271
-#define WHILE 272
-#define FOR 273
-#define DO 274
-#define SWITCH 275
-#define CASE 276
-#define DEFAULT 277
-#define BREAK 278
-#define CONTINUE 279
-#define INT 280
-#define FLOAT 281
-#define CHAR 282
-#define DOUBLE 283
-#define LONG 284
-#define SHORT 285
-#define BOOLEAN 286
-#define STRING 287
-#define ENTERO 288
-#define REAL 289
-#define CADENA 290
-#define CARACTER 291
-#define ID 292
-#define OP_SUM 293
-#define OP_RES 294
-#define OP_MULT 295
-#define OP_DIV 296
-#define OP_MOD 297
-#define OP_AND 298
-#define OP_OR 299
-#define OP_NOT 300
-#define OP_ASIG 301
-#define OP_IGUAL 302
-#define OP_DIFF 303
-#define OP_MAYOR 304
-#define OP_MENOR 305
-#define OP_MAYOR_IGUAL 306
-#define OP_MENOR_IGUAL 307
-#define OP_INC 308
-#define OP_DIS 309
-#define OP_SUM_ASIG 310
-#define OP_RES_ASIG 311
-#define OP_MULT_ASIG 312
-#define OP_DIV_ASIG 313
-#define OP_MOD_ASIG 314
-#define PARENT_A 315
-#define PARENT_C 316
-#define LLAVE_A 317
-#define LLAVE_C 318
-#define CORCHETE_A 319
-#define CORCHETE_C 320
-#define PUNTO_COMA 321
-#define DOS_PUNTOS 322
-#define COMA 323
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
@@ -209,4 +138,4 @@ extern YYSTYPE yylval;
 int yyparse (void);
 
 
-#endif /* !YY_YY_Y_TAB_H_INCLUDED  */
+#endif /* !YY_YY_SYNTAX_TAB_H_INCLUDED  */
