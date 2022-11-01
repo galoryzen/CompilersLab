@@ -12,7 +12,7 @@ CTE_ENT       [-]?[0-9]+
 CTE_REAL      [-]?[0-9]+(\.[0-9]+)?([eE][-+]?[0-9]+(\.[0-9]+)?)?
 CTE_CADENA    \".*\"
 CTE_CARACTER  \'.*\'
-
+INCLUDE ^"#include"[ ]*<.+\.h>
 
 %%
 
@@ -52,6 +52,7 @@ CTE_CARACTER  \'.*\'
 
 "//".*"\n"      {}
 "/*".*"*/"      {}
+[\t]*      {}
 \/\*(.*\n)*.*\*\/      {}
 
 {CTE_ENT}       {return(INT);}
@@ -59,6 +60,7 @@ CTE_CARACTER  \'.*\'
 {CTE_CADENA}    {return(STRING);}
 {CTE_CARACTER}  {return(CHAR);}
 {ID}            {return(ID);}
+{INCLUDE}       {return(INCLUDE)}
 
 "="           {return(OP_ASIG);}
 "+"           {return(OP_SUM);}
