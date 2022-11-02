@@ -29,6 +29,8 @@ CTE_CARACTER  \'.*\'
 "return"        {return(RETURN);}
 "printf"        {return(PRINTF);}
 "scanf"         {return(SCANF);}
+"true"          {return(TRUE);}
+"false"         {return(FALSE);}
 
 "if"            {return(IF);}
 "else"          {return(ELSE);}
@@ -54,10 +56,10 @@ CTE_CARACTER  \'.*\'
 "/*".*"*/"      {}
 \/\*(.*\n)*.*\*\/      {}
 
-{CTE_ENT}       {return(INT);}
-{CTE_REAL}      {return(FLOAT);}
-{CTE_CADENA}    {return(STRING);}
-{CTE_CARACTER}  {return(CHAR);}
+{CTE_ENT}       {return(ENTERO);}
+{CTE_REAL}      {return(REAL);}
+{CTE_CADENA}    {return(CADENA);}
+{CTE_CARACTER}  {return(CARACTER);}
 {ID}            {return(ID);}
 
 "="           {return(OP_ASIG);}
