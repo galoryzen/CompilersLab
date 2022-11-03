@@ -66,6 +66,7 @@ void yyerror(char *s);
 %token OP_MULT_ASIG
 %token OP_DIV_ASIG
 %token OP_MOD_ASIG
+%token MATALO
 
 %token PARENT_A
 %token PARENT_C
@@ -77,16 +78,33 @@ void yyerror(char *s);
 
 %token DOS_PUNTOS
 %token COMA
+%token ERROR
 
 %start INIT
 
 %%
 
-include:  INCLUDE include
-        | INCLUDE
-        ;
 
-INIT  :   include funcion_init
+argumentoInclude:   ID
+                |   MATALO
+                ;
+
+includes:       INCLUDE CADENA PUNTO_COMA
+            |   INCLUDE CADENA PUNTO_COMA includes
+            |   INCLUDE CADENA includes
+            |   INCLUDE CADENA
+            |   INCLUDE argumentoInclude PUNTO_COMA
+            |   INCLUDE argumentoInclude PUNTO_COMA includes
+            |   INCLUDE argumentoInclude includes
+            |   INCLUDE argumentoInclude
+            |   error '\n' {yyerrok; yyclearin;}
+            |   error {yyerrok; yyclearin;}
+            |   error PUNTO_COMA {yyerrok; yyclearin;}
+            ;
+
+
+INIT    :  includes funcion_init
+        |  funcion_init
         ;
 
 funcion_init    :   VOID MAIN PARENT_A PARENT_C LLAVE_A LLAVE_C 
@@ -107,6 +125,8 @@ cuerpo          :   declaracion PUNTO_COMA
                 |   lectura cuerpo
                 |   escritura
                 |   escritura cuerpo
+                |   error PUNTO_COMA cuerpo   {yyerrok; yyclearin;};
+                |   error cuerpo   {yyerrok; yyclearin;};
                 ;
 
 declaracion     :   tipo dec_comp
@@ -233,7 +253,7 @@ int main(int argc, char *argv[])
 void yyerror(char *s)
 {
     errores++;
-    printf("La linea %d tiene un error sintáctico\n", (linea));
+    printf("La linea %d tiene un error sintáctico\n", (linea+1));
     fprintf(yyout, "La linea %d tiene un error sintáctico", (linea));
 }
 

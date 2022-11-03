@@ -1,3 +1,8 @@
+#include "hola";
+#include <hola>;
+#include <hola.c>
+#include "hola.c"
+
 void main()
 {
     int i,x;

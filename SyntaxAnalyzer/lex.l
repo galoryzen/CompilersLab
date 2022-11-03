@@ -12,7 +12,9 @@ CTE_ENT       [-]?[0-9]+
 CTE_REAL      [-]?[0-9]+(\.[0-9]+)?([eE][-+]?[0-9]+(\.[0-9]+)?)?
 CTE_CADENA    \".*\"
 CTE_CARACTER  \'.*\'
-INCLUDE ^#include[ ]*(<.+\.h>|\".+\.h")
+MATALO        \<.*\>
+ERROR         [0-9]+[0-9a-zA-Z_]+|([0-9]+,[0-9a-zA-Z])|([$@:!#]{ID})|({ID}[$@:!#]+[a-zA-Z_0-9$@:!#]*)
+
 
 %%
 
@@ -51,10 +53,10 @@ INCLUDE ^#include[ ]*(<.+\.h>|\".+\.h")
 "short"         {return(SHORT);}
 "boolean"       {return(BOOLEAN);}
 "String"        {return(STRING);}
+"#include"       {return(INCLUDE);}
 
 "//".*"\n"      {}
 "/*".*"*/"      {}
-[\t]*      {}
 \/\*(.*\n)*.*\*\/      {}
 
 {CTE_ENT}       {return(ENTERO);}
@@ -62,7 +64,8 @@ INCLUDE ^#include[ ]*(<.+\.h>|\".+\.h")
 {CTE_CADENA}    {return(CADENA);}
 {CTE_CARACTER}  {return(CARACTER);}
 {ID}            {return(ID);}
-{INCLUDE}       {return(INCLUDE)}
+{MATALO}        {return(MATALO);}
+{ERROR}         {return(ERROR);}
 
 "="           {return(OP_ASIG);}
 "+"           {return(OP_SUM);}
