@@ -12,7 +12,7 @@ CTE_ENT       [-]?[0-9]+
 CTE_REAL      [-]?[0-9]+(\.[0-9]+)?([eE][-+]?[0-9]+(\.[0-9]+)?)?
 CTE_CADENA    \".*\"
 CTE_CARACTER  \'.*\'
-INCLUDE ^"#include"[ ]*<.+\.h>
+INCLUDE ^#include[ ]*(<.+\.h>|\".+\.h")
 
 %%
 
