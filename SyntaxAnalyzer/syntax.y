@@ -51,6 +51,7 @@ void yyerror(char *s);
 %token CADENA
 %token CARACTER
 %token ID
+%token INCLUDE
 %token TRUE
 %token FALSE
 
@@ -81,7 +82,11 @@ void yyerror(char *s);
 
 %%
 
-INIT  :   funcion_init
+include:  INCLUDE include
+        | INCLUDE
+        ;
+
+INIT  :   include funcion_init
         ;
 
 funcion_init    :   VOID MAIN PARENT_A PARENT_C LLAVE_A LLAVE_C 
