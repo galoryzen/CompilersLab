@@ -7,7 +7,7 @@ Presentado por:
 Para ejecutar el programa puede hacerlo mediante el script de test.sh que hemos proprocionado
 Haciendo sh test.sh <archivo> se puede probar el programa
 EJ:
-sh prueba1.c
+sh test.sh prueba1.c
 Y la salida se encontrará en salida.txt
 ---------------------------------------//------------------------------------
 De lo contrario, proporcionamos los comandos necesarios para ejecutar nuestro programa manualmente:
