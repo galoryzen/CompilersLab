@@ -4,13 +4,14 @@
 #include <stdlib.h>
 #include <string.h>
 //yylineno
-#include "syntax.tab.h"
+#include "LAB02_Cabrera_Gonzalez_Lopez.tab.h"
 extern int yylex();
 extern FILE * yyin;
 extern FILE * yyout;
 extern int linea;
 int errores = 0;
 void yyerror(char *s);
+extern int yylineno;
 %}
 
 %token PUBLIC
@@ -97,26 +98,29 @@ includes:       INCLUDE CADENA PUNTO_COMA
             |   INCLUDE argumentoInclude PUNTO_COMA includes
             |   INCLUDE argumentoInclude includes
             |   INCLUDE argumentoInclude
-            |   error '\n' {yyerrok; yyclearin;}
-            |   error {yyerrok; yyclearin;}
-            |   error PUNTO_COMA {yyerrok; yyclearin;}
+            |   error
+            |   error includes
             ;
 
 
 INIT    :  includes funcion_init
         |  funcion_init
+        |  includes
         ;
 
 funcion_init    :   VOID MAIN PARENT_A PARENT_C LLAVE_A LLAVE_C 
                 |   VOID MAIN PARENT_A PARENT_C LLAVE_A cuerpo LLAVE_C
                 ;
 
-cuerpo          :   declaracion PUNTO_COMA
+cuerpo          :   declaracion PUNTO_COMA 
                 |   declaracion PUNTO_COMA cuerpo
-                |   asignacion PUNTO_COMA
+                |   declaracion cuerpo
+                |   asignacion PUNTO_COMA 
                 |   asignacion PUNTO_COMA cuerpo
                 |   condicion
                 |   condicion cuerpo
+                |   condicion PUNTO_COMA
+                |   condicion PUNTO_COMA cuerpo
                 |   ciclo PUNTO_COMA
                 |   ciclo PUNTO_COMA cuerpo
                 |   ciclo
@@ -125,8 +129,8 @@ cuerpo          :   declaracion PUNTO_COMA
                 |   lectura cuerpo
                 |   escritura
                 |   escritura cuerpo
-                |   error PUNTO_COMA cuerpo   {yyerrok; yyclearin;};
-                |   error cuerpo   {yyerrok; yyclearin;};
+                |   error cuerpo {yyerrok;}
+                |   error {printf("soy retrasado chicos\n"); yyerrok;}
                 ;
 
 declaracion     :   tipo dec_comp
@@ -138,7 +142,6 @@ dec_comp        :   ID
                 |   ID OP_ASIG expresion
                 |   ID COMA dec_comp
                 |   ID OP_ASIG expresion COMA dec_comp
-                ;
                 ;
 
 asignacion      :   ID OP_ASIG expresion
@@ -182,6 +185,8 @@ condicion       :   IF PARENT_A expresion PARENT_C LLAVE_A LLAVE_C
                 |   IF PARENT_A expresion PARENT_C LLAVE_A cuerpo LLAVE_C ELSE LLAVE_A LLAVE_C
                 |   IF PARENT_A expresion PARENT_C LLAVE_A LLAVE_C ELSE LLAVE_A cuerpo LLAVE_C
                 |   IF PARENT_A expresion PARENT_C LLAVE_A cuerpo LLAVE_C ELSE LLAVE_A cuerpo LLAVE_C
+                |   error {yyerrok;}
+                |   error cuerpo {yyerrok;}
                 ;
 
 argumentoFor    :   ID OP_ASIG expresion
@@ -199,20 +204,22 @@ ciclo           :   WHILE PARENT_A expresion PARENT_C LLAVE_A LLAVE_C
                 |   DO LLAVE_A cuerpo LLAVE_C WHILE PARENT_A expresion PARENT_C PUNTO_COMA
                 |   FOR PARENT_A declaracionFor PUNTO_COMA expresion PUNTO_COMA argumentoFor PARENT_C LLAVE_A LLAVE_C
                 |   FOR PARENT_A declaracionFor PUNTO_COMA expresion PUNTO_COMA argumentoFor PARENT_C LLAVE_A cuerpo LLAVE_C
+                |   error {yyerrok;}
+                |   error cuerpo {yyerrok;}
                 ;
 
-lectura         :   SCANF PARENT_A PARENT_C PUNTO_COMA
-                |   SCANF PARENT_A CADENA PARENT_C PUNTO_COMA
+lectura         :   SCANF PARENT_A CADENA PARENT_C PUNTO_COMA
                 |   SCANF PARENT_A CADENA COMA ID PARENT_C PUNTO_COMA
                 |   SCANF PARENT_A CADENA COMA ID COMA ID PARENT_C PUNTO_COMA
                 |   SCANF PARENT_A CADENA COMA ID COMA ID COMA ID PARENT_C PUNTO_COMA
+                |   error PUNTO_COMA {yyerrok;}
                 ;
 
-escritura       :   PRINTF PARENT_A PARENT_C PUNTO_COMA
-                |   PRINTF PARENT_A CADENA PARENT_C PUNTO_COMA
+escritura       :   PRINTF PARENT_A CADENA PARENT_C PUNTO_COMA
                 |   PRINTF PARENT_A CADENA COMA ID PARENT_C PUNTO_COMA
                 |   PRINTF PARENT_A CADENA COMA ID COMA ID PARENT_C PUNTO_COMA
                 |   PRINTF PARENT_A CADENA COMA ID COMA ID COMA ID PARENT_C PUNTO_COMA
+                |   error PUNTO_COMA {yyerrok;}
                 ;
 
 tipo    :   INT
@@ -253,8 +260,7 @@ int main(int argc, char *argv[])
 void yyerror(char *s)
 {
     errores++;
-    printf("La linea %d tiene un error sintáctico\n", (linea+1));
-    fprintf(yyout, "La linea %d tiene un error sintáctico", (linea));
+    fprintf(yyout, "La linea %d tiene un error sintáctico\n", (linea+1));
 }
 
 

@@ -1,0 +1,20 @@
+Analizador Sintáctico Yacc
+Presentado por:
+	Álvaro Cabrera Solano
+	Sebastian Enrique González Benítez
+	Raúl José López Grau
+
+Para ejecutar el programa puede hacerlo mediante el script de test.sh que hemos proprocionado
+Haciendo sh test.sh <archivo> se puede probar el programa
+EJ:
+sh prueba1.c
+Y la salida se encontrará en salida.txt
+---------------------------------------//------------------------------------
+De lo contrario, proporcionamos los comandos necesarios para ejecutar nuestro programa manualmente:
+
+rm -rf lex.yy.c LAB02_Cabrera_Gonzalez_Lopez.tab.c LAB02_Cabrera_Gonzalez_Lopez.tab.h a.out
+bison -d LAB02_Cabrera_Gonzalez_Lopez.y
+flex LAB02_Cabrera_Gonzalez_Lopez.l
+gcc LAB02_Cabrera_Gonzalez_Lopez.tab.c lex.yy.c -o LAB02_Cabrera_Gonzalez_Lopez -ll
+./LAB02_Cabrera_Gonzalez_Lopez archivo
+

@@ -1,10 +1,11 @@
+%option yylineno
+
 %{
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "syntax.tab.h"
+#include "LAB02_Cabrera_Gonzalez_Lopez.tab.h"
 int linea=0; /* from lexer */
-
 %}
 
 ID            [a-zA-Z_][a-zA-Z0-9_]*
@@ -12,7 +13,7 @@ CTE_ENT       [-]?[0-9]+
 CTE_REAL      [-]?[0-9]+(\.[0-9]+)?([eE][-+]?[0-9]+(\.[0-9]+)?)?
 CTE_CADENA    \".*\"
 CTE_CARACTER  \'.*\'
-MATALO        \<.*\>
+MATALO        \<[a-zA-Z0-9_.]+\>
 ERROR         [0-9]+[0-9a-zA-Z_]+|([0-9]+,[0-9a-zA-Z])|([$@:!#]{ID})|({ID}[$@:!#]+[a-zA-Z_0-9$@:!#]*)
 
 
@@ -106,7 +107,7 @@ ERROR         [0-9]+[0-9a-zA-Z_]+|([0-9]+,[0-9a-zA-Z])|([$@:!#]{ID})|({ID}[$@:!#
 ":"           {return(DOS_PUNTOS);}
 ","           {return(COMA);}
 
-\n {linea++;}
+[\n] {linea++;}
 
 %%
 

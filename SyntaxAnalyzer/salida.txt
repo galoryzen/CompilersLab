@@ -1,1 +1,1 @@
-La linea 3 tiene un error sintácticoLa linea 6 tiene un error sintácticoLa linea 7 tiene un error sintáctico
+La linea 1 tiene un error sintáctico

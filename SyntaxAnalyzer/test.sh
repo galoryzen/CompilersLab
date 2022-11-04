@@ -1,5 +1,5 @@
-rm -rf lex.yy.c syntax.tab.c syntax.tab.h a.out
-bison -d syntax.y
-flex lex.l
-gcc syntax.tab.c lex.yy.c -o a -ll
-./a $1
+rm -rf lex.yy.c LAB02_Cabrera_Gonzalez_Lopez.tab.c LAB02_Cabrera_Gonzalez_Lopez.tab.h a.out
+bison -d LAB02_Cabrera_Gonzalez_Lopez.y
+flex LAB02_Cabrera_Gonzalez_Lopez.l
+gcc LAB02_Cabrera_Gonzalez_Lopez.tab.c lex.yy.c -o LAB02_Cabrera_Gonzalez_Lopez -ll
+./LAB02_Cabrera_Gonzalez_Lopez $1
